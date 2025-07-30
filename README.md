@@ -62,7 +62,7 @@ const MAX_ACTIVE_SERVERS = 3; // Adjust based on your needs
 ```
 **NOTE:** All active MCP servers are in `server/config.json`, you can manually remove/add servers to the active queue of MCP servers here
 
-### Step 3: Set Up Environment Variables
+### Step 3: Set Up Environment Variables in Two .env Files
 
 **Server folder** (`server/.env`):
 ```bash
