@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mcp-remote": "^0.1.17",
+    "next": "^15.3.5"
+  }
+}

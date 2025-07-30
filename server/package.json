@@ -1,0 +1,70 @@
+{
+  "name": "mcp-proxy-server",
+  "version": "0.1.0",
+  "author": "Adam Wattis",
+  "license": "MIT",
+  "description": "An MCP proxy server that aggregates and serves multiple MCP resource servers through a single interface",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "mcp-proxy-server": "./build/index.js",
+    "mcp-manager": "./build/mcp-manager-cli.js"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "dev": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'tsx src/index.ts'",
+    "dev:sse": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'tsx src/sse.ts'",
+    "dev:http": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'tsx src/http-streaming.ts'",
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\" && node -e \"require('fs').chmodSync('build/mcp-manager-cli.js', '755')\"",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector build/index.js",
+    "mcp-manager": "tsx src/mcp-manager-cli.ts",
+    "index-servers": "tsx scripts/index-servers.ts",
+    "search-servers": "tsx src/search-mcps.ts",
+    "generate-ai-summaries": "tsx src/generate-ai-summaries.ts",
+    "setup-registry": "tsx src/setup-registry.ts",
+    "registry:index": "npm run index-servers",
+    "registry:setup": "npm run setup-registry"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.3",
+    "@types/cors": "^2.8.17",
+    "@types/crypto-js": "^4.2.2",
+    "@types/eventsource": "^1.1.15",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/pg": "^8.15.4",
+    "@types/uuid": "^10.0.0",
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "chokidar": "^3.6.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.5.0",
+    "eventsource": "^2.0.2",
+    "express": "^4.21.1",
+    "jose": "^6.0.11",
+    "jsonwebtoken": "^9.0.2",
+    "mcp-remote": "^0.1.17",
+    "node-fetch": "^3.3.2",
+    "node-jose": "^2.2.0",
+    "openai": "^5.6.0",
+    "pg": "^8.16.0",
+    "pkce-challenge": "^5.0.0",
+    "uuid": "^11.1.0",
+    "zod": "^3.22.4",
+    "zod-to-json-schema": "^3.23.5"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.0",
+    "@types/node": "^20.12.7",
+    "ava": "^6.1.2",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.8.3"
+  }
+}

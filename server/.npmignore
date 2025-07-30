@@ -1,0 +1,41 @@
+# Source files
+src/
+*.ts
+!*.d.ts
+
+# Development files
+.env
+.env.*
+config.json
+mcp-user-preferences.json
+
+# Development dependencies and configs
+node_modules/
+.git/
+.gitignore
+tsconfig.json
+nodemon.json
+
+# Frontend (include separately if needed)
+frontend/
+
+# Logs and temporary files
+*.log
+.DS_Store
+.vscode/
+.idea/
+
+# Test files
+test/
+tests/
+*.test.*
+*.spec.*
+
+# Development scripts
+dev/
+scripts/
+
+# Documentation (keep README.md and LICENSE)
+docs/
+CONTRIBUTING.md
+CHANGELOG.md 
