@@ -1,6 +1,6 @@
 # Metis - Intelligent MCP Router & Web Based MCP Client
 
-Metis is an advanced AI agent platform with an intelligent MCP (Model Context Protocol) router that dynamically manages up to 1,000+ MCP servers. The router uses an LRU cache system to maintain only the most relevant servers active at any time, preventing context overwhelm while providing access to a vast ecosystem of tools and services. We wanted to create this so you can add additional features while not having to deal with context overload from having over 40 tools enabled! We also provide a modular web based MCP client that anyone can modify! Our goal for this is to help other build cool applications using MCPs.
+Metis is an advanced AI agent platform with an intelligent MCP (Model Context Protocol) router that dynamically manages up to 1,000+ MCP servers. The router uses an LRU cache system to maintain only the most relevant servers active at any time, preventing context overwhelm while providing access to a vast ecosystem of tools and services. We wanted to create this so you can add additional features while not having to deal with context overload from having over 40 tools enabled! We also provide a modular web based MCP client that anyone can modify! Our goal for this is to help others build cool applications using MCPs.
 
 ## 🏗️ Architecture
 
