@@ -23,6 +23,7 @@ jobs:
       contents: write
       packages: write
       id-token: write # Required for actions/attest-build-provenance to get OIDC token
+      attestations: write # Required for creating attestations
     
     strategy:
       matrix:
@@ -94,6 +95,7 @@ jobs:
       - name: Generate artifact attestation
         # Only generate attestation on push events (when images are actually pushed)
         if: github.event_name != 'pull_request'
+        continue-on-error: true # Don't fail the workflow if attestation fails
         uses: actions/attest-build-provenance@v1
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/${{ matrix.service.name }}
