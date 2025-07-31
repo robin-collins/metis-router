@@ -14,7 +14,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  NAMESPACE: metis-router
+  REPOSITORY_OWNER_AND_NAME: ${{ github.repository }} 
 
 jobs:
   build-and-push:
@@ -59,7 +59,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ matrix.service.name }}
+          images: ${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/${{ matrix.service.name }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -92,7 +92,7 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: actions/attest-build-provenance@v1
         with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ matrix.service.name }}
+          subject-name: ${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/${{ matrix.service.name }}
           subject-digest: ${{ steps.build.outputs.digest }}
           push-to-registry: true
 
@@ -109,7 +109,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ matrix.service }}:${{ github.ref_name }}
+          image-ref: ${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/${{ matrix.service }}:${{ github.ref_name }}
           format: 'sarif'
           output: 'trivy-results-${{ matrix.service }}.sarif'
       
@@ -134,15 +134,15 @@ jobs:
       
       - name: Pull built images
         run: |
-          docker pull ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/server:${{ github.ref_name }}
-          docker pull ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/backend:${{ github.ref_name }}
-          docker pull ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/frontend:${{ github.ref_name }}
+          docker pull ${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/server:${{ github.ref_name }}
+          docker pull ${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/backend:${{ github.ref_name }}
+          docker pull ${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/frontend:${{ github.ref_name }}
       
       - name: Tag images for local testing
         run: |
-          docker tag ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/server:${{ github.ref_name }} metis-server:latest
-          docker tag ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/backend:${{ github.ref_name }} metis-backend:latest
-          docker tag ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/frontend:${{ github.ref_name }} metis-frontend:latest
+          docker tag ${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/server:${{ github.ref_name }} metis-server:latest
+          docker tag ${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/backend:${{ github.ref_name }} metis-backend:latest
+          docker tag ${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/frontend:${{ github.ref_name }} metis-frontend:latest
       
       - name: Start services with docker-compose
         run: |
@@ -203,9 +203,9 @@ jobs:
             
             The following Docker images have been published to GitHub Container Registry:
             
-            - `${{ env.REGISTRY }}/${{ env.NAMESPACE }}/server:${{ github.ref_name }}`
-            - `${{ env.REGISTRY }}/${{ env.NAMESPACE }}/backend:${{ github.ref_name }}`
-            - `${{ env.REGISTRY }}/${{ env.NAMESPACE }}/frontend:${{ github.ref_name }}`
+            - `${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/server:${{ github.ref_name }}`
+            - `${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/backend:${{ github.ref_name }}`
+            - `${{ env.REGISTRY }}/${{ env.REPOSITORY_OWNER_AND_NAME }}/frontend:${{ github.ref_name }}`
             
             ## Quick Start
             
