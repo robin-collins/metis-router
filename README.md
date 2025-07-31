@@ -243,7 +243,7 @@ npm start              # Start production server
 ## 📁 Project Structure
 
 ```
-metis-mono-repo/
+metis-router/
 ├── server/                    # 🧠 Intelligent MCP Router
 │   ├── src/
 │   │   ├── add-new-mcp.ts    # 🔧 Cache config (MAX_ACTIVE_SERVERS)
